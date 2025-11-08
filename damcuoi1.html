@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chào Mừng Đám Cưới</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      background: radial-gradient(circle at top, #ffd6d6, #b30000);
+      color: #fff;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* căn chữ giữa theo chiều dọc */
+      align-items: center;     /* căn giữa theo chiều ngang */
+      overflow: hidden;
+      position: relative;
+    }
+
+    .header {
+      font-size: 200px; /* tăng kích thước chữ hỷ */
+      color: gold;
+      text-shadow: 0 0 30px #ffcccc;
+      animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.9; }
+    }
+
+    .enter-button {
+      font-size: 28px;
+      padding: 20px 60px;
+      background: gold;
+      color: #b30000;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 50px; /* khoảng cách giữa chữ hỷ và nút */
+    }
+
+    .enter-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    }
+
+    /* Hiệu ứng pháo giấy xoắn ốc */
+    .confetti {
+      position: fixed;
+      top: -10px;
+      width: 8px;
+      height: 8px;
+      background: gold;
+      opacity: 0.9;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: fall-spiral linear infinite;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">囍</div>
+
+  <button class="enter-button" onclick="goToCard()">Click vào đây</button>
+
+  <script>
+    // Chuyển trang khi nhấn nút
+    function goToCard() {
+      window.location.href = "damcuoi.html"; // đổi tên file thiệp cưới nếu khác
+    }
+
+    // Tạo confetti xoắn ốc
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.width = confetti.style.height = (Math.random() * 8 + 4) + "px";
+      confetti.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      confetti.style.opacity = Math.random();
+      const direction = Math.random() < 0.5 ? -1 : 1;
+      confetti.style.animationName = `fall-spiral-${direction}`;
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 7000);
+    }
+
+    setInterval(createConfetti, 150);
+
+    // Thêm hai hiệu ứng xoắn trái/phải
+    const styleSheet = document.createElement("style");
+    styleSheet.innerHTML = `
+      @keyframes fall-spiral-1 {
+        0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(110vh) translateX(50px) rotate(720deg); opacity: 0; }
+      }
+      @keyframes fall-spiral--1 {
+        0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(110vh) translateX(-50px) rotate(-720deg); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+  </script>
+
+</body>
+</html>

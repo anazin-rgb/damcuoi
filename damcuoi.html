@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiệp Cưới</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      background: radial-gradient(circle at top, #ffd6d6, #b30000);
+      color: #fff;
+      text-align: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .header {
+      font-size: 80px;
+      color: gold;
+      margin-top: 40px;
+      text-shadow: 0 0 20px #ffcccc;
+      animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.9; }
+    }
+
+    .subtext {
+      font-size: 24px;
+      color: #fff8e7;
+      margin-bottom: 30px;
+    }
+
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid gold;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      padding: 20px;
+      width: 420px;
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      border: 3px solid gold;
+      height: auto;
+    }
+
+    footer {
+      margin-top: 30px;
+      color: #ffe4e1;
+      font-size: 18px;
+      padding-bottom: 40px;
+    }
+
+    /* Hiệu ứng pháo giấy */
+    .confetti {
+      position: fixed;
+      top: 0;
+      width: 10px;
+      height: 10px;
+      background: gold;
+      opacity: 0.9;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: fall linear infinite;
+      z-index: 9999;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">囍</div>
+  <div class="subtext">Mừng Lễ Thành Hôn</div>
+
+  <div class="gallery">
+    <div class="card">
+      <img id="weddingImage1" src="Hình ảnh/1.jpg" alt="Thiệp cưới 1">
+    </div>
+
+    <div class="card">
+      <img id="weddingImage2" src="Hình ảnh/2.jpg" alt="Thiệp cưới 2">
+    </div>
+  </div>
+
+  <footer>
+    💞 Trần Hiệp & Đoàn Chúc 💞 <br>
+    Trăm Năm Hạnh Phúc
+  </footer>
+
+  <!-- Âm thanh nền -->
+  <audio id="weddingMusic" autoplay loop>
+    <source src="Âm thanh/Westlife - My Love (Lyrics).mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Tạo hiệu ứng pháo giấy vàng rơi
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      confetti.style.width = confetti.style.height = (Math.random() * 8 + 4) + "px";
+      confetti.style.opacity = Math.random();
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 7000);
+    }
+
+    setInterval(createConfetti, 150);
+
+    // Bảo đảm nhạc chạy tự động (nếu trình duyệt chặn)
+    window.addEventListener('click', () => {
+      const music = document.getElementById('weddingMusic');
+      if (music.paused) {
+        music.play();
+      }
+    });
+  </script>
+
+</body>
+</html>
